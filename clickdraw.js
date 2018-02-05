@@ -9,7 +9,7 @@ var ctx = c.getContext("2d"); //retrieves canvas object
 var toggle = document.getElementById("toggle");
 var clear = document.getElementById("clear");
 
-var toggleFxn = function(e){ //toggles between circle and rectangle
+var toggleFxn = function(e){ //toggles between circle and rectangle using boolean
   circle = !circle;
   console.log(circle);
 }
@@ -17,17 +17,26 @@ var toggleFxn = function(e){ //toggles between circle and rectangle
 var drawShapes = function(e){
   e.preventDefault();
   if(circle){ //draws circle
-    ctx.beginPath();
-    ctx.strokeStyle="#FF0000";
-    ctx.fillStyle="#FF0000";
-  	ctx.arc(e.offsetX, e.offsetY, 10, 0, 2*Math.PI);
-  	ctx.stroke();
-    ctx.fill();
+    drawCircle(e.offSetX, e.offSetY);
   }else{ //draws rectangle
-    ctx.strokeStyle="#000000";
-    ctx.fillStyle="#000000"
-	  ctx.fillRect(e.offsetX-5, e.offsetY-5, 10, 10);
+    drawRect(e.offSetX, e.offSetY);
   }
+}
+
+//separate functions created to draw respective shape
+var drawCircle = function(x, y) {
+  ctx.beginPath();
+  ctx.strokeStyle="#FF0000";
+  ctx.fillStyle="#FF0000";
+  ctx.arc(x, y, 10, 0, 2*Math.PI);
+  ctx.stroke();
+  ctx.fill();
+}
+
+var drawRect = function(x, y) {
+  ctx.strokeStyle="#000000";
+  ctx.fillStyle="#000000"
+  ctx.fillRect(x-5, y-5, 10, 10);
 }
 
 var clearFxn = function(e){ //clears rectangle
